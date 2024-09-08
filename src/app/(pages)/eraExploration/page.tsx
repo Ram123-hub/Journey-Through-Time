@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import FooterThree from '@/components/footer';
 
 interface Era {
- _id:string
+  _id: string;
   name: string;
   description: string;
   image_url: string;
@@ -34,7 +34,12 @@ export default function EraExploration() {
   const fetchEra = async () => {
     try {
       const { data } = await axios.get('/api/users/getEra');
-      setEras(data);
+      // Ensure eras are unique by filtering based on _id
+      const uniqueEras = data.filter(
+        (era: Era, index: number, self: Era[]) =>
+          index === self.findIndex((e) => e._id === era._id)
+      );
+      setEras(uniqueEras);
     } catch (error) {
       setError('Error fetching era data');
       console.error('Error fetching era data', error);
@@ -46,31 +51,30 @@ export default function EraExploration() {
   useEffect(() => {
     fetchEra();
   }, []);
-   
 
-  const handleDelete =  async(id:string) =>{
+  const handleDelete = async (id: string) => {
     try {
       await axios.delete(`/api/users/deleteEra/${id}`);
-      setEras(eras.filter(era => era._id !== id));
+      setEras(eras.filter((era) => era._id !== id));
     } catch (error: any) {
       console.error('Error deleting era', error);
     }
-  }
+  };
 
   if (loading) {
     return (
-      <div className='bg-richblack max-w-[1400px] flex items-center justify-center min-h-screen mx-auto'>
-        <div className="spinner"></div> {/* Spinner component */}
+      <div className="bg-richblack max-w-[1400px] flex items-center justify-center min-h-screen mx-auto">
+        <div className="spinner"></div>
       </div>
     );
   }
 
   if (error) {
-    return <div>{error}</div>; // Handle error state
+    return <div>{error}</div>;
   }
 
   return (
-    <div className='bg-richblack text-seashell min-h-screen py-10 max-w-[1400px] mx-auto'>
+    <div className="bg-richblack text-seashell min-h-screen py-10 max-w-[1400px] mx-auto">
       <Head>
         <title>Era Exploration</title>
         <meta name="description" content="Explore various historical eras in depth" />
@@ -86,14 +90,14 @@ export default function EraExploration() {
             ))}
           </h1>
           <Slider {...settings} className="relative">
-            {eras.map((era, index) => (
-              <div key={index} className="p-8 flex flex-col items-center">
+            {eras.map((era) => (
+              <div key={era._id} className="p-8 flex flex-col items-center">
                 <Image
                   src={era.image_url}
                   alt={era.name}
                   width={400}   // Adjust width
                   height={600}  // Adjust height
-                  className='object-contain rounded-lg shadow-2xl mb-6 mx-auto card-container transform transition-transform duration-300 hover:scale-105'
+                  className="object-contain rounded-lg shadow-2xl mb-6 mx-auto card-container transform transition-transform duration-300 hover:scale-105"
                 />
                 <div className="text-center">
                   <h2 className="text-3xl font-semibold mb-4 text-rawNumber hover:text-seashell">
@@ -112,15 +116,17 @@ export default function EraExploration() {
                       Learn more
                     </a>
                   )}
-                    <Button
+                  <Button
                     onClick={() => handleDelete(era._id)}
                     className="mt-4 px-4 py-2 bg-rawNumber text-white rounded hover:bg-rawnumber2 ml-3"
-                  >Delete Era</Button>
+                  >
+                    Delete Era
+                  </Button>
                 </div>
               </div>
             ))}
           </Slider>
-          <FooterThree/>
+          <FooterThree />
         </main>
       </div>
     </div>
