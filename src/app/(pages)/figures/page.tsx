@@ -79,7 +79,7 @@ const Figures: React.FC = () => {
   }
 
   return (
-    <div className="p-8 pt-20 max-w-[1400px] mx-auto bg-richblack py-4">
+    <div className="p-8 pt-20 max-w-[1600px] mx-auto bg-richblack py-4">
       <h1 className="text-4xl font-bold text-center text-rawNumber hover:text-rawnumber2 mb-8 font-serif">
         {
           `Figures`.split(' ').map((word, index) => (

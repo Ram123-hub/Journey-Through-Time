@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       <Head>
         <title>Interactive Map</title>
       </Head>
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center py-14 bg-richblack max-w-[1400px]">
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center py-14 bg-richblack max-w-[1600px]">
         <h1 className="text-4xl font-bold mb-8  text-rawNumber hover:text-rawnumber2">
         {`Welcome to the Map `.split(' ').map((word, index) => (
               <span key={index} className="hover:animate-jump inline-block mx-2">

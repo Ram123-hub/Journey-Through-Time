@@ -74,7 +74,7 @@ export default function EraExploration() {
   }
 
   return (
-    <div className="bg-richblack text-seashell min-h-screen py-10 max-w-[1400px] mx-auto">
+    <div className="bg-richblack text-seashell min-h-screen py-10 max-w-[1600px] mx-auto">
       <Head>
         <title>Era Exploration</title>
         <meta name="description" content="Explore various historical eras in depth" />
