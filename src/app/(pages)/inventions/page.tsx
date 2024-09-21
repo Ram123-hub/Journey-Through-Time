@@ -69,7 +69,7 @@ const Inventions: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="bg-richblack max-w-[1400px] flex items-center justify-center min-h-screen mx-auto">
+      <div className="bg-richblack max-w-[1600px] flex items-center justify-center min-h-screen mx-auto">
         <div className="spinner"></div>
       </div>
     );
@@ -80,7 +80,7 @@ const Inventions: React.FC = () => {
   }
 
   return (
-    <div className="p-8 pt-20 max-w-[1400px] mx-auto bg-richblack py-4">
+    <div className="p-8 pt-20 max-w-[1600px] mx-auto bg-richblack py-4">
       <h1 className="text-4xl font-bold text-center text-rawNumber hover:text-rawnumber2 mb-8 font-serif">
         {`Inventions`.split(' ').map((word, index) => (
           <span key={index} className="hover:animate-jump inline-block mr-1">

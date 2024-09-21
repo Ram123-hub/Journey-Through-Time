@@ -68,7 +68,7 @@ const Figures: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="bg-richblack max-w-[1400px] flex items-center justify-center min-h-screen mx-auto">
+      <div className="bg-richblack max-w-[1600px] flex items-center justify-center min-h-screen mx-auto">
         <div className="spinner"></div>
       </div>
     );
