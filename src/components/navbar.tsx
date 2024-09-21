@@ -43,6 +43,9 @@ export default function Navbar() {
           </span>
         </a>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+          <div className="mr-2 mt-1">
+          <UserButton/>
+          </div>
           <button
             type="button"
             className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -51,16 +54,54 @@ export default function Navbar() {
             onClick={toggleDropdown}
           >
             <span className="sr-only">Open user menu</span>
-            {/* <Image
+            <Image
               className="w-8 h-8 rounded-full"
               src="/backgroundImage2.jpg"
               alt="User photo"
               width={32}
               height={32}
-            /> */}
-            <UserButton/>
+            />
           </button>
          
+          <div
+            className={`z-50 absolute right-0 mt-2 ${dropdownOpen ? "" : "hidden"
+              } text-base list-none bg-richblack divide-y divide-rawnumber2 rounded-lg shadow`}
+            id="user-dropdown"
+            style={{ top: "100%", right: 0 }}
+          >
+            {/* <div className="px-4 py-3">
+              <span className="block text-sm text-gray-400 truncate dark:text-gray-400">
+                <UserButton />
+              </span>
+            </div> */}
+            <ul className="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="/"
+                  className="block px-4 py-2 text-sm text-rawnumber2 hover:text-seashell"
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/sign-up"
+                  className="block px-4 py-2 text-sm text-rawnumber2 hover:text-seashell"
+                >
+                  Signup
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/sign-in"
+                  className="block px-4 py-2 text-sm text-rawnumber2 hover:text-seashell"
+                >
+                  Signin
+                </a>
+              </li>
+              <li className="ml-2 mt-1 mb-1"></li>
+            </ul>
+          </div>
           <button
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
