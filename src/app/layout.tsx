@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import NextAuthProvider from "@/providers/NextAuthProvider";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
+
 
 export const metadata: Metadata = {
   title: "Journey Through Time",
@@ -10,21 +13,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
- 
+
 }: {
   children: React.ReactNode;
-    // Define the type for user
+  // Define the type for user
 }) {
   return (
-    <html lang="en">
-      <body>
-        <main className="bg-hookersgreen min-h-screen">
-          <NextAuthProvider>
-            <Navbar/>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <main className="bg-hookersgreen w-full min-h-screen">
+            <Navbar />
             {children}
-          </NextAuthProvider>
-        </main>
-      </body>
-    </html>
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

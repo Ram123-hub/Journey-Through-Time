@@ -1,42 +1,18 @@
-import { getToken } from "next-auth/jwt";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-// This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)' ,'/'])
 
-  // Define public paths
-  const isPublicPath = ["/", "/login", "/signup"].includes(path);
-
-  // Get the token from the request
-  const token = await getToken({ req: request });
-
-  // If the user is authenticated and tries to access a public path, redirect them to the homepage
-  if (token && isPublicPath) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
+export default clerkMiddleware((auth, request) => {
+  if (!isPublicRoute(request)) {
+    auth().protect()
   }
+})
 
-  // If the user is not authenticated and tries to access a protected path, redirect them to the login page
-  if (!token && !isPublicPath) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
-  }
-
-  // Allow the request to proceed
-  return NextResponse.next();
-}
-
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    "/viewTimeline",
-    "/timelineForm",
-    "/figures",
-    "/figureForm",
-    "/eraExploration",
-    "/eraExplorationForm",
-    "/inventions",
-    "/inventionForm",
-    "/maps",
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
-};
+}

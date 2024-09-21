@@ -2,16 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import Watch from '@/components/Watch';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/options';
+
 import { redirect } from 'next/navigation';
 
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
-  if(!session)
-  {
-    redirect('/login')
-  }
+
+ 
   return (
     <div className='bg-hookersgreen min-h-screen flex flex-col items-center'>
       <div className='bg-richblack max-w-[1400px] w-full h-auto mt-16 py-8 px-4'>
