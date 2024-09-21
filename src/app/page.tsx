@@ -11,7 +11,7 @@ export default async function Home() {
  
   return (
     <div className='bg-hookersgreen min-h-screen flex flex-col items-center'>
-      <div className='bg-richblack max-w-[1400px] w-full h-auto mt-16 py-8 px-4'>
+      <div className='bg-richblack max-w-[1600px] w-full h-auto mt-16 py-8 px-4'>
         <h1 className='font-serif text-rawNumber text-4xl md:text-6xl  space-y-6 text-center pt-6 mt-8'>
           {
             `Journey Through Time`.split(' ').map((word, index) => (
